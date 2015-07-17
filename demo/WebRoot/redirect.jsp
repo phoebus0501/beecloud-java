@@ -13,7 +13,7 @@
 	/* *
 	 功能：商户结算跳转至指定支付方式页面
 	 版本：3.3
-	 日期：2015-03-20
+	 日期：2015-07-11
 	 说明：
 	 以下代码只是为了方便商户测试而提供的样例代码，商户可以根据自己网站的需要，按照技术文档编写,并非一定要使用该代码。
 	 该代码仅供学习和研究支付宝接口使用，只是提供一个参考。
@@ -50,8 +50,8 @@
 		String type = request.getParameter("paytype");
 
 		BeeCloud.registerApp("0950c062-5e41-44e3-8f52-f89d8cf2b6eb", "a5571c5a-591e-4fb9-bd92-0283782af00d");
-		//BCPayResult的type字段有OK和非OK两种，当type字段是OK时（对应值为0），result字段的值是支付所需的html或者code_url,
-		//当type的字段为非OK的时候，result的字段的值为具体的错误信息。商户系统可以任意显示，打印或者记录日志。
+		//BCPayResult的type字段有OK和非OK两种，当type字段是OK时（对应值为0）.返回相应正确的信息。
+		//当type的字段为非OK的时候，errMsg, err_detail存储错误信息。商户系统可以任意显示，打印或者记录日志。
 		BCPayResult bcPayResult = new BCPayResult();
 		
 		if (type.equals("alipay")) {
