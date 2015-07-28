@@ -131,6 +131,10 @@ s	 * 	WX_NATIVE 微信公众号二维码支付
 	                        result.setUrl(ret.get("url").toString());
 	                        result.setType(RESULT_TYPE.OK);
 	                    }
+                	} else if (channel.equals(PAY_CHANNEL.ALI_OFFLINE_QRCODE)) {
+                		if (ret.containsKey("qrCode") && null != ret.get("qrCode")) {
+                			
+                		}
                 	} else if (channel.equals(PAY_CHANNEL.UN_WEB)) {
                 		if (ret.containsKey("html") && null != ret.get("html")) {
 	                        result.setHtml(ret.get("html").toString());

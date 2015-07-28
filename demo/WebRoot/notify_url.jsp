@@ -44,8 +44,11 @@
 		return verify(sign, BCCache.getAppID() + BCCache.getAppSecret(),
 	            timestamp, "UTF-8");
 	}
-
 	
+	boolean verifySignAll(String sign, String channelType, String transactionType, String notifyUrl, Integer retryCounter, String transactionId, Integer transactionFee, Boolean tradeSuccess, String timestamp) {
+		return verify(sign, BCCache.getAppID() + BCCache.getAppSecret() + channelType + transactionType + notifyUrl + retryCounter + transactionId + transactionFee + tradeSuccess,
+	            timestamp, "UTF-8");
+	}
 	
 	byte[] getContentBytes(String content, String charset) {
         if (charset == null || "".equals(charset)) {
@@ -79,13 +82,25 @@
 
 	String timestamp = jsonObj.getString("timestamp");
 
+	String signAll = jsonObj.getString("signAll");
+	
+	String channelType = jsonObj.getString("channelType");
+    String transactionType = jsonObj.getString("transactionType");
+    String notifyUrl = jsonObj.getString("notifyUrl");
+    Integer retryCounter = jsonObj.getInt("retryCounter");
+    String transactionId =  jsonObj.getString("transactionId");
+    Integer transactionFee = jsonObj.getInt("transactionFee");
+    Boolean tradeSuccess = jsonObj.getBoolean("tradeSuccess");
+	
 	boolean status = verifySign(sign, timestamp);
+	
+	boolean status_all = verifySignAll(signAll, channelType, transactionType, notifyUrl, retryCounter, transactionId, transactionFee, tradeSuccess, timestamp);
 	
 	if (!jsonObj.containsKey("messageDetail")) {
 		out.println("error: messageDetailNull"); 
 	}
 
-	if (status) {//验证成功
+	if (status) {//验证成功     //可以选择另外的判断 if(status_all)
 
 		out.println("success"); //请不要修改或删除
 
